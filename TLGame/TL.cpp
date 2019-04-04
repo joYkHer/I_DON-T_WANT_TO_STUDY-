@@ -1,30 +1,30 @@
 #include<iostream>
 #include<string>
-#include<cstdlib> // random()º¯Êı
-#include<ctime> // ·µ»Ø¾àÀëÄ³Ä³ÄêµÄÊıÖµ
+#include<cstdlib> // random()å‡½æ•°
+#include<ctime> // è¿”å›è·ç¦»æŸæŸå¹´çš„æ•°å€¼
 #include<unordered_map>
-//#include<algorithm> // begin ºÍ end º¯ÊıÔÚÕâÀïÃ´???
+//#include<algorithm> 
 #define N 11 // 0 - 10
 #define INF 1e10
 using namespace std;
 
 //void getId(auto&);
-// ÓÑÔªµÃÉùÃ÷Á½´Î°¡....
+
 string sltName();
-int rtRand(); // constexpr ¿ÉÒÔÃ´....¹ûÈ»²»¿ÉÒÔÃ´...
+int rtRand(); //
 
 class Per{
-    // »ùÀàfriend
-    // ÅÉÉúÀà´ó¸ÅÒ²¶¼ÊÇfriend°Ñ...
+    // åŸºç±»friend
+   
   //  friend void getId(auto&);
 public:
     using num = string::size_type;
     //Per() = default;
-    // ¹¹Ôìº¯ÊıÄÜÊÇĞéº¯ÊıÃ´....
-    Per() { static int ctr = 1; this->id = ctr++;} // Õâ¸öÓÃº¯ÊıÁĞ±í²»ĞĞµÄÂğ???
-    virtual void setGame(unordered_map<int,int>&){}; // Ğéº¯ÊıĞèÒªÊµÏÖÂğ?
-    // TMĞéº¯ÊıÒ²ÒªÊµÏÖ...×îÆğÂë¼Ó¸ö{}
-    auto setGes( num ,unordered_map<int,int>& )->Per&; // ¶ÔÓÚauto, ÒıÓÃÒªÁíÍâÉùÃ÷
+    
+    Per() { static int ctr = 1; this->id = ctr++;} 
+    virtual void setGame(unordered_map<int,int>&){}; 
+    // TMè™šå‡½æ•°æœ€èµ·ç åŠ ä¸ª{}...
+    auto setGes( num ,unordered_map<int,int>& )->Per&; // å¯¹äºauto, å¼•ç”¨è¦å¦å¤–å£°æ˜
     auto setName( string _name )->Per&;
     num getGes(){ return this->Ges ; }
     num getId(){ return this->id ; }
@@ -33,12 +33,12 @@ private:
     num Ges;
     num id;
     string name;
-   //  mutable int ctr = 0; mutableÔÚÕâ¶ùÃ»ÓÃ°¡....
+   
 };
 
 Per& Per::setGes( num _Ges , unordered_map<int,int>& info ){
     this->Ges = _Ges;
-    info[_Ges]++; // ÒªÊÇÃ»ÓĞµÄ»°³õÊ¼»¯Îª0Ã´????
+    info[_Ges]++; // è¦æ˜¯æ²¡æœ‰çš„è¯åˆå§‹åŒ–ä¸º0ä¹ˆ
     return *this;
 }
 
@@ -47,31 +47,31 @@ Per& Per::setName(string _name){
     return *this;
 }
 
-/**<  Per»ùÀà */
+/**<  PeråŸºç±» */
 
 class Agst:public Per{
 public:
-    Agst():Per() {}; // Õâ¸ö*this ¸ÄµÄÊÇÕâ¸öAgstÊÇ°É...
-    // idÉè¶¨
+    Agst():Per() {}; // 
+    // idè®¾å®š
     void setGame(unordered_map<int,int>& info) override{
         this->setGes( rtRand()%N, info ).setName(sltName());
-    };// override ¸´Ğ´º¯ÊıÒªĞ´¶¨ÒåÀïÃæÃ´....
+    };// override å¤å†™å‡½æ•°è¦å†™å®šä¹‰é‡Œé¢...
 };
 
 /**< Agst */
-class Ated:public Per{ // »ùÀàµÄpublic»¹ÊÇpublic£¬ private»¹ÊÇprivate
+class Ated:public Per{ // åŸºç±»çš„publicè¿˜æ˜¯publicï¼Œ privateè¿˜æ˜¯private
 public:
     Ated():Per() {};
-    void setGame(unordered_map<int,int>&info) override{ // overrideº¯ÊıÒªĞ´ÔÚº¯Êı¶¨ÒåÀïÃæÃ´....Ê²Ã´ÆÆ¹æ¶¨...
+    void setGame(unordered_map<int,int>&info) override{ // 
         string _name;
-    // ÅÉÉúÀàµÄº¯ÊıÄÜ·ÃÎÊ»ùÀàµÄ±äÁ¿?
-        num _Ges; // ¸¸ÀàµÄ±äÁ¿²»ÓÃÉùÃ÷Ã´,Ö±½Óµ÷ÓÃÃ´...
+    // æ´¾ç”Ÿç±»
+        num _Ges; // çˆ¶ç±»çš„å˜é‡ä¸ç”¨å£°æ˜ç›´æ¥è°ƒç”¨...
         cout<<"pls enter Name and number"<<endl
             <<"Name: ";
         cin>>_name;
         cout<<"Number: ";
 
-        while(  cin>>_Ges  ){ // ·µ»ØÊäÈëµÄÖµ?
+        while(  cin>>_Ges  ){ 
             if(  _Ges<0 || _Ges >N-1 )
                 cout<<"pls enter the Number between 0 and "<<N-1<<": ";
             else break;
@@ -87,14 +87,14 @@ public:
     using num = string::size_type;
     Jur() = default;
     void prtAsltWr(Agst *,int ,unordered_map<int,int>&);
-    void prtWr()const;//²»ĞŞ¸ÄÀà³ÉÔ±
+    void prtWr()const;//ä¸ä¿®æ”¹ç±»æˆå‘˜
 private:
     int wrId = -1;
     num wrGes = INF;
     string wrName = "";
 };
 
-void Jur::prtAsltWr(Agst *player,int len,unordered_map<int,int>&info){ // begin()  end() ´«»ØµÄÊÇµü´úÆ÷Ã´,²»ÊÇÖ¸Õë???µü´úÆ÷ÊÇ²»ÊÇÖ¸Õë???
+void Jur::prtAsltWr(Agst *player,int len,unordered_map<int,int>&info){ // 
     for( int i=0 ; i<len; i++ ){
         if( player[i].getGes() < this->wrGes && info[player[i].getGes()]==1  ){
             this->wrGes = player[i].getGes();
@@ -107,7 +107,7 @@ void Jur::prtAsltWr(Agst *player,int len,unordered_map<int,int>&info){ // begin(
 }
 
 void Jur::prtWr()const{
-    if(this->wrId == -1)//Ã»ÓĞÊ¤Õß
+    if(this->wrId == -1)//æ²¡æœ‰èƒœè€…
         cout<<"There is no winner!."<<endl;
     else
         cout<<"winner: "<<this->wrId<<" "<<this->wrName<<" "<<this->wrGes;
@@ -118,33 +118,33 @@ void Jur::prtWr()const{
 int rtRand(){
     static int ctr = 1;
     srand( static_cast<unsigned int>(time(0)) + (ctr++));
-    return rand(); // random rand() ËãÊÇ³£Á¿Ã´...
-    // rand()¹ûÈ»²»ÊÇconst expressionÃ´....
+    return rand(); //
+    // rand()éconst expression
 }
 
 string sltName(){
     static string names[] = { "GaoHaoRan","YH","LuYu","XinYu","007","butYuHao","ChenYuNing","ZhouZeYu","ZhaoKai"  };
-    // end(names) - begin(names) ÇóÊı×é³¤¶È
-    // Ö»ÓÃ³õÊ¼»¯Ò»´Î£¬¶øÇÒ²»»á¸Ä±ä
+    // end(names) - begin(names) æ±‚æ•°ç»„é•¿åº¦
+    // åªç”¨åˆå§‹åŒ–ä¸€æ¬¡ï¼Œè€Œä¸”ä¸ä¼šæ”¹å˜
     return names[   rtRand() % ( end(names) - begin(names) )   ];
 }
 /*
 void getId(auto& per){
     static int ctr = 1;
-    per.id = ctr++; // Ó¦¸Ã¿ÉÒÔµÄ°É....
+    per.id = ctr++; // 
 }
 */
 int main(){
     int n; unordered_map<int , int > info;
     cout<<"pls enter number of players: ";
     cin>>n;
-    Agst players[n]; // Õâ¸öÊÇ²»ÊÇ¹¹½¨º¯ÊıÒÑ¾­Ä¬ÈÏ¹¹½¨ºÃÁË????
+    Agst players[n]; // è¿™ä¸ªæ„å»ºå‡½æ•°å·²ç»é»˜è®¤æ„å»ºå¥½äº†
     for(int i=0; i<n; i++ )
         players[i].setGame(info);
 
     Ated role;
     role.setGame(info);
-    // µÃ³öÓ®¼ÒÁË...
+    // å¾—å‡ºèµ¢å®¶äº†...
     Jur judge;
     judge.prtAsltWr(players,n,info);
     judge.prtWr();
